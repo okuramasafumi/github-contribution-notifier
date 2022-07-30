@@ -1,0 +1,25 @@
+name: Notifier
+
+env:
+  TARGET_GITHUB_USERNAME: ${{ secrets.TARGET_GITHUB_USERNAME }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+on:
+  schedule:
+    # Every day 10pm (22 0'clcock), JST
+    # Customize this string if you'd like to change when it should notify
+    - cron:  '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  Notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+      - name: Run script
+        run: bundle exec ruby main.rb
