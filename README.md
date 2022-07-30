@@ -4,7 +4,7 @@ Notify your GitHub contribution count to Slack via GitHub Actions.
 
 ## Usage
 
-1. Clone this repository
+1. Fork this repository
 2. Go to repository settings, Security > Secrets > Actions
 3. Add `TARGET_GITHUB_USERNAME` secret with your username
 4. Add `SLACK_WEBHOOK_URL` with your incoming webhook URL for Slack
