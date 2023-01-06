@@ -10,11 +10,11 @@ unless cell # It's UTC based so sometimes there's no cell for today
   exit 0
 end
 
-count = cell.attributes['data-count'].value
-exit 1 if count.nil? # Fatal, something is wrong
+level = cell.attributes['data-level'].value
+exit 1 if level.nil? # Fatal, something is wrong
 
 require 'slack-notifier'
 
 url = ENV.fetch('SLACK_WEBHOOK_URL')
 notifier = Slack::Notifier.new(url)
-notifier.ping "Today's contribution count: #{count}"
+notifier.ping "Today's contribution level: #{level}"
