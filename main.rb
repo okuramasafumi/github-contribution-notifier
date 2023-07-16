@@ -4,7 +4,7 @@ require 'mechanize'
 today = Date.today
 agent = Mechanize.new
 page = agent.get("https://github.com/#{ENV.fetch('TARGET_GITHUB_USERNAME')}")
-cell = page.search("//rect[@data-date='#{today}']").first
+cell = page.search("//td[@data-date='#{today}']").first
 unless cell # It's UTC based so sometimes there's no cell for today
   puts "The cell for today doesn't exist, run it again after #{Time.utc(today.year, today.month, today.day).localtime}"
   exit 0
