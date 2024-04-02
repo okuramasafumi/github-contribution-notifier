@@ -1,16 +1,19 @@
 require 'date'
-require 'mechanize'
+require 'ferrum'
 
 today = Date.today
-agent = Mechanize.new
-page = agent.get("https://github.com/#{ENV.fetch('TARGET_GITHUB_USERNAME')}")
-cell = page.search("//td[@data-date='#{today}']").first
+browser = Ferrum::Browser.new
+page = browser.create_page
+page.go_to("https://github.com/#{ENV.fetch('TARGET_GITHUB_USERNAME')}")
+frame = page.frames.first
+sleep 1 # Wait for frame load
+cell = frame.at_xpath("//td[@data-date='#{today}']")
 unless cell # It's UTC based so sometimes there's no cell for today
   puts "The cell for today doesn't exist, run it again after #{Time.utc(today.year, today.month, today.day).localtime}"
   exit 0
 end
 
-level = cell.attributes['data-level'].value
+level = cell.attribute('data-level')
 exit 1 if level.nil? # Fatal, something is wrong
 
 require 'slack-notifier'

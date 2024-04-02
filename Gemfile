@@ -2,5 +2,5 @@
 
 source "https://rubygems.org"
 
-gem "mechanize"
+gem "ferrum"
 gem "slack-notifier"
