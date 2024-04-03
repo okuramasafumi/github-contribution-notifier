@@ -21,7 +21,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.2
           bundler-cache: true
       - name: Run script
         run: bundle exec ruby main.rb
