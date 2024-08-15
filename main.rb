@@ -16,8 +16,13 @@ end
 level = cell.attribute('data-level')
 exit 1 if level.nil? # Fatal, something is wrong
 
-require 'slack-notifier'
+message = "Today's contribution level: #{level}"
+if ENV['GITHUB_CONTRIBUTION_NOTIFIER_DEBUG']
+  puts message
+else
+  require 'slack-notifier'
 
-url = ENV.fetch('SLACK_WEBHOOK_URL')
-notifier = Slack::Notifier.new(url)
-notifier.ping "Today's contribution level: #{level}"
+  url = ENV.fetch('SLACK_WEBHOOK_URL')
+  notifier = Slack::Notifier.new(url)
+  notifier.ping message
+end
