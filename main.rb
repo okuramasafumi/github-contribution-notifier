@@ -5,9 +5,9 @@ today = Date.today
 browser = Ferrum::Browser.new
 page = browser.create_page
 page.go_to("https://github.com/#{ENV.fetch('TARGET_GITHUB_USERNAME')}")
-frame = page.frames.first
+# frame = page.frames.first
 sleep 1 # Wait for frame load
-cell = frame.at_xpath("//td[@data-date='#{today}']")
+cell = page.at_xpath("//td[@data-date='#{today}']")
 unless cell # It's UTC based so sometimes there's no cell for today
   puts "The cell for today doesn't exist, run it again after #{Time.utc(today.year, today.month, today.day).localtime}"
   exit 0
