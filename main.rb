@@ -2,7 +2,7 @@ require 'date'
 require 'ferrum'
 
 today = Date.today
-browser = Ferrum::Browser.new
+browser = Ferrum::Browser.new(process_timeout: 30)
 page = browser.create_page
 page.go_to("https://github.com/#{ENV.fetch('TARGET_GITHUB_USERNAME')}")
 # frame = page.frames.first
