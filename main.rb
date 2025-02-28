@@ -21,7 +21,7 @@ level = cell.attribute('data-level')
 exit 1 if level.nil? # Fatal, something is wrong
 
 message = "Today's contribution level: #{level}"
-if ENV['GITHUB_CONTRIBUTION_NOTIFIER_DEBUG']
+unless ENV['SLACK_WEBHOOK_URL']
   puts message
 else
   require 'slack-notifier'
