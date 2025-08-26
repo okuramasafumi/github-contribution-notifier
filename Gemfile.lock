@@ -22,6 +22,7 @@ GEM
 PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-darwin-21
   x86_64-linux
 
@@ -30,4 +31,4 @@ DEPENDENCIES
   slack-notifier
 
 BUNDLED WITH
-   2.3.18
+   2.7.1
